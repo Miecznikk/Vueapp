@@ -2,11 +2,14 @@
     <div class="sign_up">
         <form @submit.prevent="sign_up" autocomplete="off">
             <h1>Sign Up</h1>
-            <input type="text" v-model="name" placeholder="Enter your name">
+            <input type="text" v-model="name" placeholder="Enter your username">
+            <span class="text-red" v-if="!nameIsValid">Invalid username</span>
             <input type="email" v-model="email" placeholder="Enter your email">
+            <span class="text-red" v-if="!emailIsValid">Email invalid</span>
             <input type="password" v-model="password" placeholder="Enter your password">
+            <span class="text-red" v-if="!passwordIsValid">Invalid password</span>
             <button type="submit">Sign Up</button>
-            <span>Have an account? </span><router-link to="/">Log in</router-link>
+            <span>Have an account? </span><router-link to="/login">Log in</router-link>
         </form>
     </div>
 </template>
@@ -20,17 +23,29 @@ export default {
         return{
             name:'',
             email:'',
-            password:''
+            password:'',
+            nameIsValid:true,
+            emailIsValid:true,
+            passwordIsValid:true
         }
     },
     methods: {
         async sign_up(){
-            const nameIsValid = this.name!='';
-            const passwordIsValid = this.password.length > 7;
-            const formValid = nameIsValid && passwordIsValid;
-            let users = await axios.get(`http://localhost:3000/users?email=${this.email}`);
-            if(users.status == 200 || users.status == 304){
-                users = users.data;
+            this.nameIsValid = this.name.length > 4;
+            this.passwordIsValid = this.password.length > 7;
+            this.emailIsValid = this.email.length > 4;
+            const formValid = this.nameIsValid && this.passwordIsValid;
+            if(formValid){
+                let users = await axios.get(`http://localhost:3000/users?email=${this.email}`);
+                if(users.status == 200 || users.status == 304){
+                    users = users.data;
+                    console.log(users[0]);
+                    if(users.length>0){
+                        this.emailIsValid = false;
+                        alert('Email already taken!')
+                        return;
+                    }
+                }
             }
             if(formValid){
                 console.log('success')
@@ -47,14 +62,19 @@ export default {
                     this.$router.push('/')
                 }
             }
-            else{
-                alert("Something went wrong")
-            }
+        }
+    },
+    mounted() {
+        if(localStorage.getItem('authenticated') == 1){
+            this.$router.push('/')
         }
     },
 }
 </script>
 <style>
+    .text-red{
+        color:rgb(211, 0, 0);
+    }
 
     form input{
         display:block;
