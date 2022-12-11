@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import SignUp from '../components/SignUp.vue'
 import LogIn from '../components/LogIn.vue'
-
-
+import Add from '../components/Add.vue'
+import Update from '../components/Update.vue'
+/* eslint-disable */
 const routes = [
   {
     path: '/',
@@ -19,6 +20,16 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LogIn
+  },
+  {
+    path: '/add',
+    name:'add',
+    component:Add
+  },
+  {
+    path:'/update',
+    name:'update',
+    component:Update
   }
 ]
 

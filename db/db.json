@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "name": "Jan",
+      "email": "janek@wp.pl",
+      "password": "janek2137",
+      "id": 1
+    },
+    {
+      "name": "Miecznik",
+      "email": "ja@wp.pl",
+      "password": "xxcc1802",
+      "id": 2
+    }
+  ],
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "KFC",
+      "contact": 737888909,
+      "address": "Legionowa 3"
+    },
+    {
+      "id": 2,
+      "name": "McDonalds",
+      "contact": 517123999,
+      "address": "Geodetów 43"
+    },
+    {
+      "name": "Pan Schabowy",
+      "address": "Kołłątaja 67",
+      "contact": 899899888,
+      "id": 3
+    },
+    {
+      "name": "super restauracja",
+      "address": "alcantara 33",
+      "contact": 121121212,
+      "id": 4
+    }
+  ]
+}

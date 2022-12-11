@@ -59,7 +59,7 @@ export default {
                     this.name='';
                     this.email='';
                     this.password='';
-                    this.$router.push('/')
+                    this.$router.push('/login')
                 }
             }
         }
@@ -89,7 +89,7 @@ export default {
     form button{
         display:block;
         margin: 10px auto;
-        width:320px;
+        width:150px;
         height:40px;
         background-color: skyblue;
         border:1px solid rgb(44, 185, 255);
